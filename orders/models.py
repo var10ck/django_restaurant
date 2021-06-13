@@ -53,6 +53,7 @@ class Client(models.Model):
     table = models.ForeignKey(TableTop,
                               null=True,
                               on_delete=models.SET_NULL,
+                              verbose_name=_('Столик')
                               )
 
     def __str__(self):
