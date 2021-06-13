@@ -69,7 +69,9 @@ class Order(models.Model):
     user = models.ForeignKey(User,
                              null=True,
                              blank=True,
-                             on_delete=models.SET_NULL)
+                             on_delete=models.SET_NULL,
+                             verbose_name=_('Пользователь'),
+                             )
     client = models.ForeignKey(Client,
                                null=True,
                                on_delete=models.SET_NULL,
