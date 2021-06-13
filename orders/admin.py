@@ -20,7 +20,12 @@ class OrderAdmin(admin.ModelAdmin):
                     ]
     list_editable = ['status',
                      ]
+    list_filter = ['user',
+                   'status',
+                   ]
     inlines = [OrderedMealInline]
+
+    exclude = ['user']
 
     def save_model(self, request, obj, form, change):
         if getattr(obj, 'user', None) is None:
@@ -28,6 +33,13 @@ class OrderAdmin(admin.ModelAdmin):
         obj.save()
 
 
-admin.site.register(Client)
+@register(Client)
+class ClientAdmin(admin.ModelAdmin):
+    list_filter = ['table']
+    fields = [('first_name', 'middle_name', 'last_name'),
+              'table',
+              ]
+
+
 admin.site.register(OrderStatus)
 admin.site.register(TableTop)
