@@ -104,7 +104,7 @@ class OrderedMeal(models.Model):
                              related_name='meals',
                              )
     quantity = models.SmallIntegerField(_('Количество'),
-                                        default=1,
+                                        default=0,
                                         )
 
     price = models.DecimalField(_('Цена'),
