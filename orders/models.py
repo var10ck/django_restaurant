@@ -81,6 +81,7 @@ class Order(models.Model):
                                null=True,
                                on_delete=models.SET_NULL,
                                verbose_name=_('Статус'),
+                               default=OrderStatus.objects.filter(name='Новый').first(),
                                )
     discount = models.SmallIntegerField(_('Скидка'),
                                         default=0)
