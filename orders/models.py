@@ -1,3 +1,4 @@
+from django.conf import settings
 from django.db import models
 from django.contrib.auth.models import User
 from menu.models import Meal
@@ -67,11 +68,12 @@ class Client(models.Model):
 class Order(models.Model):
     user = models.ForeignKey(User,
                              null=True,
-                             on_delete=models.SET_NULL,
-                             )
+                             blank=True,
+                             on_delete=models.SET_NULL)
     status = models.ForeignKey(OrderStatus,
                                null=True,
                                on_delete=models.SET_NULL,
+                               verbose_name=_('Статус'),
                                )
     discount = models.SmallIntegerField(_('Скидка'),
                                         default=0)
@@ -80,7 +82,7 @@ class Order(models.Model):
         sum = 0
         for m in self.meals.all():
             sum += m.meal.price * m.quantity
-        return '{0:.2f}'.format(sum * Decimal(1.0 - self.discount/100, ) if self.discount else sum)
+        return '{0:.2f}'.format(sum * Decimal(1.0 - self.discount / 100, ) if self.discount else sum)
 
     total = property(_get_total)
 

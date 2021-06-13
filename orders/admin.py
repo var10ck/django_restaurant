@@ -22,6 +22,11 @@ class OrderAdmin(admin.ModelAdmin):
                      ]
     inlines = [OrderedMealInline]
 
+    def save_model(self, request, obj, form, change):
+        if getattr(obj, 'user', None) is None:
+            obj.user = request.user
+        obj.save()
+
 
 admin.site.register(Client)
 admin.site.register(OrderStatus)
