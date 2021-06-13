@@ -70,6 +70,11 @@ class Order(models.Model):
                              null=True,
                              blank=True,
                              on_delete=models.SET_NULL)
+    client = models.ForeignKey(Client,
+                               null=True,
+                               on_delete=models.SET_NULL,
+                               verbose_name=_('Клиент'),
+                               )
     status = models.ForeignKey(OrderStatus,
                                null=True,
                                on_delete=models.SET_NULL,
